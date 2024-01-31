@@ -14,6 +14,6 @@ public class Level1 {
         String result = "REJECT";
 
         log.info("Message received. Message id: " + messageId + ". Result: " + result);
-        log.error("Cannot transform transaction", new RuntimeException("Exception message"));
+        log.error("Cannot transform transaction. Message id: " + messageId, new RuntimeException("Exception message"));
     }
 }
