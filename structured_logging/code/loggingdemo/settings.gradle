@@ -2,4 +2,5 @@ rootProject.name = 'loggingdemo'
 include 'level0'
 include 'level1'
 include 'level2'
+include 'level3'
 
