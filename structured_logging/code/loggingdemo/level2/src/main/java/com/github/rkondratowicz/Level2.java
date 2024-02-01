@@ -1,13 +1,13 @@
 package com.github.rkondratowicz;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.github.rkondratowicz.lib.EventLogger;
+import com.github.rkondratowicz.lib.EventLoggerFactory;
 
 import java.util.Map;
 import java.util.UUID;
 
 public class Level2 {
-    private static final Logger log = LoggerFactory.getLogger(Level2.class);
+    private static final EventLogger log = EventLoggerFactory.getLogger(Level2.class);
 
     public static void main(String[] args) {
         UUID messageId = UUID.randomUUID();
@@ -16,14 +16,14 @@ public class Level2 {
         log.info(
             "Message received",
             Map.of(
-                "message_id", messageId,
+                "message_id", messageId.toString(),
                 "result", result
             )
         );
         log.error(
             "Cannot transform transaction",
             Map.of(
-                "message_id", messageId
+                "message_id", messageId.toString()
             ),
             new RuntimeException("Exception message")
         );
