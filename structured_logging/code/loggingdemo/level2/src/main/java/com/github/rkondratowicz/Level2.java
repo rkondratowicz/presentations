@@ -10,22 +10,22 @@ public class Level2 {
     private static final EventLogger log = EventLoggerFactory.getLogger(Level2.class);
 
     public static void main(String[] args) {
-        UUID messageId = UUID.randomUUID();
-        String result = "REJECT";
+        var messageId = UUID.randomUUID().toString();
+        var result = "REJECT";
 
         // Logging starts here.
 
         log.info(
             "Message received",
             Map.of(
-                "message_id", messageId.toString(),
+                "message_id", messageId,
                 "result", result
             )
         );
         log.error(
             "Cannot transform transaction",
             Map.of(
-                "message_id", messageId.toString()
+                "message_id", messageId
             ),
             new RuntimeException("Exception message")
         );
