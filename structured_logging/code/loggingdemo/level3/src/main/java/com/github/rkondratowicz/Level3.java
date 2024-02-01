@@ -14,6 +14,8 @@ public class Level3 {
         var messageId = UUID.randomUUID().toString();
         var result = "REJECT";
 
+        // Logging starts here.
+
         log.audit(new MsgReceived(messageId, result));
     }
 }

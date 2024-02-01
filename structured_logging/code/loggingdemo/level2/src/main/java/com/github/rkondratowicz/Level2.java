@@ -13,6 +13,8 @@ public class Level2 {
         UUID messageId = UUID.randomUUID();
         String result = "REJECT";
 
+        // Logging starts here.
+
         log.info(
             "Message received",
             Map.of(

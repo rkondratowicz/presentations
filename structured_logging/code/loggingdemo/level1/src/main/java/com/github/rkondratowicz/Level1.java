@@ -13,6 +13,8 @@ public class Level1 {
         UUID messageId = UUID.randomUUID();
         String result = "REJECT";
 
+        // Logging starts here.
+
         log.info("Message received. Message id: " + messageId + ". Result: " + result);
         log.error("Cannot transform transaction. Message id: " + messageId, new RuntimeException("Exception message"));
     }
