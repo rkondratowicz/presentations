@@ -1,0 +1,6 @@
+rootProject.name = 'springonion'
+
+include 'domain'
+include 'application'
+include 'intrastructure'
+

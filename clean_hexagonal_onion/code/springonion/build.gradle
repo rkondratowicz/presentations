@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'io.freefair.lombok' version '8.6'
+    id 'java-test-fixtures'
+}
+
+group = 'org.github.rkondratowicz'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'java-test-fixtures'
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
