@@ -9,6 +9,8 @@ repositories {
 
 dependencies {
     testImplementation(libs.junit.jupiter)
+    testImplementation("org.assertj:assertj-core:3.26.0")
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
