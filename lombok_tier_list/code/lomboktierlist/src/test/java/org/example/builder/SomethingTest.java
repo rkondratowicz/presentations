@@ -1,7 +1,11 @@
 package org.example.builder;
 
-public class Main {
-    public static void main(String[] args) {
+import org.junit.jupiter.api.Test;
+
+class SomethingTest {
+
+    @Test
+    void test() {
         var sth = Something
             .builder()
             .type("x")
@@ -10,5 +14,6 @@ public class Main {
             .postCode("1234")
             .whatever("yo")
             .build();
+
     }
 }
