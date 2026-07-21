@@ -9,24 +9,29 @@
  * single-word emphasis) that the base components don't already expose.
  */
 
-:root {
-  /* Warm cream surface, near-black warm ink — the print-page palette. */
-  --bg: #f5f2ec;
-  --surface: #eee9df;
-  --surface-2: #e7e1d4;
+/* Body font for this talk only — Space Grotesk. */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
 
-  --ink: #17140f;
-  --ink-muted: #3a352c; /* body / subhead copy */
+:root {
+  --font-body: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Pale blue-gray paper, near-black ink — the print-page palette. */
+  --bg: #e8ecef;
+  --surface: #dde2e6;
+  --surface-2: #d2d9de;
+
+  --ink: #14171c;
+  --ink-muted: #454c54; /* body / subhead copy */
 
   /* Kicker + byline muted tone, reusing the existing --accent hook so the
      <Title> kicker (which reads var(--accent)) picks it up for free. */
-  --accent: #6b6455;
-  --brand: #6b6455; /* progress bar; kept quiet, not a bright brand color */
+  --accent: #566270;
+  --brand: #566270; /* progress bar; kept quiet, not a bright brand color */
 
-  --border: #c9c2ae;
+  --border: #c3cbd1;
 
   /* The one accent color, reserved for a single emphasized word per headline. */
-  --rust: #b23b1e;
+  --cobalt: #2b3fa0;
 
   color-scheme: light;
 }
@@ -60,7 +65,7 @@ h1 em,
 h2 em,
 h3 em {
   font-style: italic;
-  color: var(--rust);
+  color: var(--cobalt);
 }
 
 /* The two horizontal rules that bracket every slide like a masthead. */
