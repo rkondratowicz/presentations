@@ -1,0 +1,128 @@
+---
+title: "Death by a Thousand Delays"
+date: 2026-07-21
+tags: [nodejs, typescript, tooling, ai]
+description: "AI made writing code fast. The rest of the Node.js toolchain didn't get the memo — a look at linting, testing, TypeScript, and package managers."
+draft: false
+---
+
+<Title kicker="Node.js tooling in the AI era" subtitle="Rethinking the Node.js toolchain now that AI has made writing code the fastest part of the job.">
+  Death by a Thousand Delays
+</Title>
+
+<Slide>
+  ## The bottleneck moved
+
+  - AI writes the code in seconds.
+  - Now you wait on the *lint*, the *format*, the *test run*, the *install*.
+  - The slow parts of your stack finally show up.
+</Slide>
+
+<Slide>
+  ## ESLint & Prettier: the tax on every save
+
+  Industry standard. Also just... slow.
+</Slide>
+
+<Code title="Same rules, different engine" lang="bash" code={`npx oxlint@latest      # 50-100x faster than ESLint
+npx oxfmt@latest       # 30x faster than Prettier, 3x faster than Biome`} />
+
+<TwoColumn title="Old way vs new way">
+  <Fragment slot="left">
+    ### ESLint + Prettier
+    - Two tools, two configs
+    - JS-based, single-threaded
+    - Minutes on large monorepos
+  </Fragment>
+  <Fragment slot="right">
+    ### oxlint + oxfmt
+    - Rust, parallel by default
+    - 800+ rules, ESLint-compatible
+    - Type-aware linting via `tsgo`
+  </Fragment>
+</TwoColumn>
+
+<Slide>
+  ## Jest was never built for this
+
+  A second build pipeline, just for tests.
+</Slide>
+
+<Code title="One pipeline, not two" lang="ts" code={`// vite.config.ts
+export default defineConfig({
+  plugins: [react()],
+  test: { environment: 'jsdom' }, // Vitest reuses this
+});`} />
+
+<TwoColumn title="Old way vs new way">
+  <Fragment slot="left">
+    ### Jest
+    - Separate transform pipeline
+    - Own config, own mocks
+    - Cold starts add up
+  </Fragment>
+  <Fragment slot="right">
+    ### Vitest
+    - Shares your Vite config
+    - Instant HMR watch mode
+    - Jest-compatible API
+  </Fragment>
+</TwoColumn>
+
+<Slide>
+  ## `tsc` is the longest coffee break
+
+  Editors stall. CI waits. You wait.
+</Slide>
+
+<Code title="TypeScript 7: the native compiler" lang="text" code={`Build time:            ~10x faster
+VS Code project load:  9.6s -> 1.2s
+Memory usage:          ~50% lower`} />
+
+<TwoColumn title="Old way vs new way">
+  <Fragment slot="left">
+    ### TypeScript 6 ("Strada")
+    - JS-based compiler
+    - Great DX, hits a ceiling at scale
+  </Fragment>
+  <Fragment slot="right">
+    ### TypeScript 7 ("Corsa")
+    - Native Go port
+    - Same language, radically faster
+  </Fragment>
+</TwoColumn>
+
+<Slide>
+  ## `npm install`, again
+
+  Every worktree. Every agent. Every time.
+</Slide>
+
+<Code title="pnpm-workspace.yaml" lang="yaml" code={`packages:
+  - 'packages/*'
+enableGlobalVirtualStore: true`} />
+
+<TwoColumn title="Old way vs new way">
+  <Fragment slot="left">
+    ### npm
+    - One `node_modules` copy per project
+    - New worktree = full reinstall
+    - Fine for 1 agent, painful for 5
+  </Fragment>
+  <Fragment slot="right">
+    ### pnpm
+    - Content-addressable global store
+    - New worktree = symlinks, nearly instant
+    - Built for parallel AI agents
+  </Fragment>
+</TwoColumn>
+
+<Quote cite="Every developer, every AI-assisted PR">
+  The code was never the bottleneck. Everything around it was.
+</Quote>
+
+<Slide>
+  ## Thanks
+
+  Questions?
+</Slide>
