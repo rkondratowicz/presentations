@@ -1,0 +1,32 @@
+---
+// Opening / section title slide.
+interface Props {
+  subtitle?: string;
+  kicker?: string; // one deliberate kicker is fine; don't put one on every slide.
+}
+const { subtitle, kicker } = Astro.props;
+---
+
+<section class="slide slide--title">
+  <div>
+    {kicker && <p class="kicker">{kicker}</p>}
+    <h1><slot /></h1>
+    {subtitle && <p class="subtitle">{subtitle}</p>}
+  </div>
+</section>
+
+<style>
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    margin: 0 0 var(--space-2);
+  }
+  .subtitle {
+    font-size: var(--step-h3);
+    color: var(--ink-muted);
+    max-width: 40ch;
+    margin: var(--space-2) 0 0;
+  }
+</style>

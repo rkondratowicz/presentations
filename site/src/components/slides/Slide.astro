@@ -1,0 +1,20 @@
+---
+// Generic slide: a full-viewport panel for freeform content.
+interface Props {
+  align?: 'start' | 'center';
+  class?: string;
+}
+const { align = 'center', class: className = '' } = Astro.props;
+---
+
+<section class:list={['slide', `slide--${align}`, className]}>
+  <div class="slide__content">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .slide--start .slide__content {
+    margin-block: 0 auto;
+  }
+</style>

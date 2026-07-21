@@ -1,0 +1,67 @@
+---
+import { Code as Shiki } from 'astro:components';
+
+// Code slide. Pass source as `code` + `lang`, optionally a heading and
+// highlighted line ranges via `mark` (e.g. "2-4,7").
+interface Props {
+  code: string;
+  lang?: string;
+  title?: string;
+  mark?: string;
+}
+const { code, lang = 'text', title, mark } = Astro.props;
+
+function parseRanges(spec?: string): number[] {
+  if (!spec) return [];
+  const out: number[] = [];
+  for (const part of spec.split(',')) {
+    const [a, b] = part.split('-').map((n) => parseInt(n.trim(), 10));
+    if (Number.isFinite(a)) {
+      for (let i = a; i <= (Number.isFinite(b) ? b : a); i++) out.push(i);
+    }
+  }
+  return out;
+}
+const marked = new Set(parseRanges(mark));
+---
+
+<section class="slide">
+  <div>
+    {title && <h3>{title}</h3>}
+    <div class="code-frame">
+      <Shiki
+        code={code.trim()}
+        lang={lang as any}
+        transformers={[
+          {
+            line(node: any, line: number) {
+              if (marked.has(line)) this.addClassToHast(node, 'line--mark');
+            },
+          },
+        ]}
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .code-frame {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .code-frame :global(pre) {
+    margin: 0;
+    padding: var(--space-3);
+    font-size: clamp(0.9rem, 0.6rem + 0.9vw, 1.25rem);
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+  .code-frame :global(.line--mark) {
+    background: color-mix(in oklch, var(--brand) 22%, transparent);
+    display: inline-block;
+    width: 100%;
+    margin-inline: calc(-1 * var(--space-3));
+    padding-inline: var(--space-3);
+  }
+</style>

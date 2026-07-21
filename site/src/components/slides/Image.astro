@@ -1,0 +1,40 @@
+---
+// Image slide. Put images in site/public/talks/<slug>/ and reference by URL,
+// e.g. src="/talks/my-talk/diagram.png".
+interface Props {
+  src: string;
+  alt: string;
+  title?: string;
+  contain?: boolean; // true = letterbox (default), false = fill/cover
+}
+const { src, alt, title, contain = true } = Astro.props;
+---
+
+<section class="slide">
+  <div>
+    {title && <h3>{title}</h3>}
+    <figure>
+      <img src={src} alt={alt} class:list={[contain ? 'contain' : 'cover']} />
+    </figure>
+  </div>
+</section>
+
+<style>
+  figure {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+  img {
+    max-width: 100%;
+    max-height: 68vh;
+    border-radius: var(--radius);
+  }
+  .cover {
+    width: 100%;
+    object-fit: cover;
+  }
+  .contain {
+    object-fit: contain;
+  }
+</style>

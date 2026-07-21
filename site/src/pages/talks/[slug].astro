@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Deck from '../../layouts/Deck.astro';
+
+// Slide components made available to every deck's MDX WITHOUT per-file imports.
+import Slide from '../../components/slides/Slide.astro';
+import Title from '../../components/slides/Title.astro';
+import Code from '../../components/slides/Code.astro';
+import Image from '../../components/slides/Image.astro';
+import TwoColumn from '../../components/slides/TwoColumn.astro';
+import Quote from '../../components/slides/Quote.astro';
+import TierList from '../../components/slides/TierList.astro';
+
+const slideComponents = { Slide, Title, Code, Image, TwoColumn, Quote, TierList };
+
+export async function getStaticPaths() {
+  const talks = await getCollection('talks', ({ data }) => !data.draft);
+  return talks.map((talk) => ({ params: { slug: talk.id }, props: { talk } }));
+}
+
+const { talk } = Astro.props;
+const { Content } = await render(talk);
+---
+
+<Deck title={talk.data.title}>
+  <Content components={slideComponents} />
+</Deck>

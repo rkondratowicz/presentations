@@ -1,0 +1,64 @@
+---
+title: "Example Deck"
+date: 2026-07-21
+tags: [template, demo]
+description: "Copy this file to start a new talk. It shows every slide type."
+---
+
+<Title kicker="A worked example" subtitle="Copy this file, change the frontmatter, start writing.">
+  Building slides in HTML
+</Title>
+
+<Slide>
+  ## How this works
+
+  - Each slide is a component (`<Slide>`, `<Title>`, `<Code>`, ...).
+  - No imports needed — the components are available in every deck.
+  - Navigate with **← →**, **Space**, or click. Press **F** for fullscreen.
+</Slide>
+
+<Code
+  title="A code slide"
+  lang="java"
+  mark="2-3"
+  code={`public record User(String name, String email) {
+    static User of(String name, String email) {
+        return new User(name, email);
+    }
+}`}
+/>
+
+<TwoColumn title="Two columns">
+  <Fragment slot="left">
+    ### Before
+    Verbose, boilerplate-heavy classes.
+  </Fragment>
+  <Fragment slot="right">
+    ### After
+    Concise, intentional code.
+  </Fragment>
+</TwoColumn>
+
+<TierList
+  title="A tier list"
+  tiers={{
+    S: ["@Value", "@Builder"],
+    A: ["@Getter", "@Slf4j"],
+    C: ["@Data"],
+    F: ["@SneakyThrows"],
+  }}
+/>
+
+{/* Drop images in site/public/talks/example/ then reference them like this:
+<Image src="/talks/example/diagram.png" alt="Architecture diagram" title="An image slide" />
+*/}
+
+<Quote cite="Someone, probably">
+  Committed design choices beat safe defaults.
+</Quote>
+
+<Slide>
+  ## Thanks
+
+  Questions?
+</Slide>

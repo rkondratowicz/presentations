@@ -1,0 +1,69 @@
+/*
+ * deck.css — the slide runtime layout. Each .slide is a full-viewport panel;
+ * native CSS scroll-snap does the paging, JS just drives the scroll position.
+ */
+
+.deck {
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* hide scrollbar; nav is by keyboard */
+}
+.deck::-webkit-scrollbar {
+  display: none;
+}
+
+.slide {
+  position: relative;
+  z-index: var(--z-slide);
+  min-height: 100vh;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-5) clamp(var(--space-4), 8vw, 10rem);
+}
+
+/* Slide content never runs edge-to-edge on wide displays. */
+.slide > * {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+/* Progress bar — fixed chrome above slides. */
+.deck-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--brand);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease-out);
+  z-index: var(--z-chrome);
+}
+
+/* Slide counter — bottom-right. */
+.deck-counter {
+  position: fixed;
+  right: var(--space-3);
+  bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  z-index: var(--z-chrome);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck {
+    scroll-behavior: auto;
+  }
+  .deck-progress {
+    transition: none;
+  }
+}

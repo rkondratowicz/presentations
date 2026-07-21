@@ -1,0 +1,27 @@
+---
+import '../styles/theme.css';
+import '../runtime/deck.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="deck-progress"></div>
+    <div class="deck-counter"></div>
+    <main class="deck">
+      <slot />
+    </main>
+    <script src="../runtime/deck.js"></script>
+  </body>
+</html>

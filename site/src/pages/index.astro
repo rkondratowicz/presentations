@@ -1,0 +1,110 @@
+---
+import '../styles/theme.css';
+import { getCollection } from 'astro:content';
+
+const talks = (await getCollection('talks', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Presentations</title>
+  </head>
+  <body>
+    <main class="wrap">
+      <header>
+        <h1>Presentations</h1>
+        <p class="lede">Talks, built as HTML decks.</p>
+      </header>
+
+      <ul class="talks">
+        {
+          talks.map((talk) => (
+            <li>
+              <a href={`/talks/${talk.id}`}>
+                <span class="talks__title">{talk.data.title}</span>
+                {talk.data.description && (
+                  <span class="talks__desc">{talk.data.description}</span>
+                )}
+                <span class="talks__meta">
+                  <time>{fmt(talk.data.date)}</time>
+                  {talk.data.tags.map((t) => (
+                    <span class="tag">{t}</span>
+                  ))}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+
+    <style>
+      .wrap {
+        max-width: 900px;
+        margin-inline: auto;
+        padding: var(--space-5) var(--space-3);
+      }
+      .lede {
+        color: var(--ink-muted);
+        font-size: var(--step-h3);
+      }
+      .talks {
+        list-style: none;
+        margin: var(--space-4) 0 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      .talks a {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: var(--space-3);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        color: var(--ink);
+        text-decoration: none;
+        transition:
+          border-color var(--dur) var(--ease-out),
+          transform var(--dur) var(--ease-out);
+      }
+      .talks a:hover {
+        border-color: var(--brand);
+        transform: translateY(-2px);
+      }
+      .talks__title {
+        font-family: var(--font-display);
+        font-size: var(--step-h3);
+      }
+      .talks__desc {
+        color: var(--ink-muted);
+        font-size: 1rem;
+      }
+      .talks__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        margin-top: 0.25rem;
+        font-size: 0.85rem;
+        color: var(--ink-muted);
+      }
+      .tag {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        padding: 0.15em 0.5em;
+        border-radius: var(--radius-sm);
+        background: var(--surface-2);
+      }
+    </style>
+  </body>
+</html>

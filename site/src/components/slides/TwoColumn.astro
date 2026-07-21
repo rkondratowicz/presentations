@@ -1,0 +1,32 @@
+---
+// Two-column slide. Fill named slots: <Fragment slot="left"> and
+// <Fragment slot="right">. Uses flexbox (1D layout, per the design rules).
+interface Props {
+  title?: string;
+  ratio?: string; // flex-basis of the left column, e.g. "1fr" / "40%"
+}
+const { title } = Astro.props;
+---
+
+<section class="slide">
+  <div>
+    {title && <h3>{title}</h3>}
+    <div class="cols">
+      <div class="col"><slot name="left" /></div>
+      <div class="col"><slot name="right" /></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .col {
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+</style>

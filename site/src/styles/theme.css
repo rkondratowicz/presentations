@@ -1,0 +1,139 @@
+/*
+ * theme.css — the single source of visual truth for every deck.
+ * Encodes the rules in ../../../impeccable-design-rules.md. Reskin a deck by
+ * overriding these custom properties; don't fork this file per talk.
+ *
+ * Scene sentence (per the design rules, dark vs light is never a default):
+ * a developer presents to a room with the lights dimmed and a bright projector,
+ * so the surface is a deep near-black and the ink is a bright off-white. That
+ * physical scene forces dark; it is a deliberate choice, not a reflex.
+ *
+ * Colors are OKLCH. The neutrals are tinted a hair toward the brand hue
+ * (chroma 0.01–0.02), never toward warm-by-default.
+ */
+
+:root {
+  /* Brand hue anchor (indigo-violet). Change --brand-h to reskin the whole deck. */
+  --brand-h: 265;
+
+  /* Surfaces — deep, tinted toward the brand hue, not gray. */
+  --bg: oklch(0.17 0.02 var(--brand-h));
+  --surface: oklch(0.22 0.025 var(--brand-h));
+  --surface-2: oklch(0.27 0.03 var(--brand-h));
+
+  /* Ink — bright off-white for contrast well past 4.5:1 on --bg. */
+  --ink: oklch(0.97 0.01 var(--brand-h));
+  --ink-muted: oklch(0.82 0.02 var(--brand-h)); /* still clears 4.5:1 on --bg */
+
+  /* Brand + accent. One committed color; used deliberately, not everywhere. */
+  --brand: oklch(0.72 0.16 var(--brand-h));
+  --accent: oklch(0.78 0.15 175); /* teal, on a genuine contrast axis from brand */
+
+  /* Borders — full borders only; no side-stripes (see design rules). */
+  --border: oklch(0.35 0.02 var(--brand-h));
+
+  /* Type. Contrast axis: a serif display against a sans body. Swap freely. */
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Fluid type scale. Display max stays <= 6rem and letter-spacing floor -0.04em. */
+  --step-body: clamp(1.25rem, 1rem + 1.2vw, 1.75rem);
+  --step-h3: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+  --step-h2: clamp(2.2rem, 1.5rem + 2.6vw, 3.5rem);
+  --step-display: clamp(2.8rem, 1.6rem + 4.5vw, 5.5rem); /* <= 6rem ceiling */
+
+  /* Spacing rhythm — varied, not uniform. */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.75rem;
+  --space-4: 3rem;
+  --space-5: 5rem;
+
+  /* Radius — cards top out at 16px (design rules); never 32px+. */
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  /* Semantic z-index scale — never arbitrary 999/9999. */
+  --z-slide: 1;
+  --z-chrome: 10;
+  --z-overlay: 20;
+
+  /* Motion — ease-out exponential, no bounce. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 260ms;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.05;
+  letter-spacing: -0.02em; /* floor is -0.04em; stay looser than that */
+  text-wrap: balance;
+  margin: 0 0 var(--space-3);
+}
+
+h1 {
+  font-size: var(--step-display);
+}
+h2 {
+  font-size: var(--step-h2);
+}
+h3 {
+  font-size: var(--step-h3);
+}
+
+p,
+li {
+  text-wrap: pretty;
+  max-width: 65ch; /* body line length cap 65–75ch */
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.15em;
+}
+
+strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* Reduced motion is not optional (design rules). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

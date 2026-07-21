@@ -1,0 +1,79 @@
+---
+// Tier-list slide (S/A/B/C/D/F). Pass `tiers` as an object mapping a tier
+// label to an array of item strings, e.g. { S: ["@Value"], F: ["@SneakyThrows"] }.
+interface Props {
+  title?: string;
+  tiers: Record<string, string[]>;
+}
+const { title, tiers } = Astro.props;
+
+// Distinct hue per tier, composed around the brand ramp — no side-stripes.
+const hues: Record<string, number> = {
+  S: 145,
+  A: 110,
+  B: 90,
+  C: 60,
+  D: 35,
+  F: 15,
+};
+---
+
+<section class="slide">
+  <div>
+    {title && <h3>{title}</h3>}
+    <div class="tiers">
+      {
+        Object.entries(tiers).map(([label, items]) => (
+          <div class="tier" style={`--tier-h:${hues[label] ?? 265}`}>
+            <div class="tier__label">{label}</div>
+            <div class="tier__items">
+              {items.map((item) => (
+                <span class="tier__item">{item}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .tiers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .tier {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .tier__label {
+    flex: 0 0 4rem;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: var(--step-h3);
+    font-weight: 700;
+    color: oklch(0.2 0.02 var(--tier-h));
+    background: oklch(0.78 0.15 var(--tier-h));
+  }
+  .tier__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+  }
+  .tier__item {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    padding: 0.35em 0.7em;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+  }
+</style>
