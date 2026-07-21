@@ -1,0 +1,86 @@
+/*
+ * Per-talk reskin: "Editorial / Magazine Cover" style
+ * (see ../../docs/styles/editorial.md for the full spec).
+ *
+ * This file is only imported by death_by_a_thousand_delays.mdx, so Astro
+ * bundles it just for this route — it never touches theme.css or any
+ * other deck. Reskin by overriding the shared custom properties, plus a
+ * handful of small structural additions (masthead rules, page numbering,
+ * single-word emphasis) that the base components don't already expose.
+ */
+
+:root {
+  /* Warm cream surface, near-black warm ink — the print-page palette. */
+  --bg: #f5f2ec;
+  --surface: #eee9df;
+  --surface-2: #e7e1d4;
+
+  --ink: #17140f;
+  --ink-muted: #3a352c; /* body / subhead copy */
+
+  /* Kicker + byline muted tone, reusing the existing --accent hook so the
+     <Title> kicker (which reads var(--accent)) picks it up for free. */
+  --accent: #6b6455;
+  --brand: #6b6455; /* progress bar; kept quiet, not a bright brand color */
+
+  --border: #c9c2ae;
+
+  /* The one accent color, reserved for a single emphasized word per headline. */
+  --rust: #b23b1e;
+
+  color-scheme: light;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Regular-weight serif headlines — bolding pushes this back toward "pitch deck". */
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
+h1 {
+  letter-spacing: -0.01em;
+  line-height: 1.02;
+}
+
+p,
+li {
+  color: var(--ink-muted);
+}
+
+/* Selective italic + accent — exactly one emphasized word per headline.
+   Scoped to headings only, so italics already used in body copy (e.g. the
+   "lint, format, test run, install" list) stay plain, not accent-colored. */
+h1 em,
+h2 em,
+h3 em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+/* The two horizontal rules that bracket every slide like a masthead. */
+.slide {
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Kicker: uppercase, tracked-out, bold sans — the eyebrow above the headline. */
+.kicker {
+  font-family: var(--font-body) !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  font-size: 0.8rem !important;
+}
+
+/* Footer numbering, styled like a running issue/page number. */
+.deck-counter {
+  font-family: Georgia, var(--font-display), serif;
+  font-style: italic;
+  color: var(--accent);
+}

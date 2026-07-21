@@ -6,12 +6,14 @@ description: "AI made writing code fast. The rest of the Node.js toolchain didn'
 draft: false
 ---
 
+import './death_by_a_thousand_delays.css';
+
 <Title kicker="Node.js tooling in the AI era" subtitle="Rethinking the Node.js toolchain now that AI has made writing code the fastest part of the job.">
-  Death by a Thousand Delays
+  Death by a *Thousand* Delays
 </Title>
 
 <Slide>
-  ## The bottleneck moved
+  ## The bottleneck *moved*
 
   - AI writes the code in seconds.
   - Now you wait on the *lint*, the *format*, the *test run*, the *install*.
@@ -19,7 +21,7 @@ draft: false
 </Slide>
 
 <Slide>
-  ## ESLint & Prettier: the tax on every save
+  ## ESLint & Prettier: the *tax* on every save
 
   Industry standard. Also just... slow.
 </Slide>
@@ -43,7 +45,7 @@ npx oxfmt@latest       # 30x faster than Prettier, 3x faster than Biome`} />
 </TwoColumn>
 
 <Slide>
-  ## Jest was never built for this
+  ## Jest was *never* built for this
 
   A second build pipeline, just for tests.
 </Slide>
@@ -70,7 +72,7 @@ export default defineConfig({
 </TwoColumn>
 
 <Slide>
-  ## `tsc` is the longest coffee break
+  ## `tsc` is the *longest* coffee break
 
   Editors stall. CI waits. You wait.
 </Slide>
@@ -93,7 +95,7 @@ Memory usage:          ~50% lower`} />
 </TwoColumn>
 
 <Slide>
-  ## `npm install`, again
+  ## `npm install`, *again*
 
   Every worktree. Every agent. Every time.
 </Slide>

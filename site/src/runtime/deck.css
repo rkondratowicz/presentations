@@ -15,6 +15,17 @@
   display: none;
 }
 
+/* Browsers default the fullscreen backdrop to black, independent of the
+   page's own theme — that reads as a jarring "switch to dark mode" flash
+   on any letterboxing when `.deck` goes fullscreen. Match it to --bg so
+   fullscreen looks like the deck, not the UA default. */
+.deck:fullscreen {
+  background: var(--bg);
+}
+.deck::backdrop {
+  background: var(--bg);
+}
+
 .slide {
   position: relative;
   z-index: var(--z-slide);
