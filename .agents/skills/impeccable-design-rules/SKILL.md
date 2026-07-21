@@ -1,6 +1,11 @@
+---
+name: impeccable-design-rules
+description: Rules for designing and building production-grade frontend interfaces — websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Use this skill whenever the user asks to build, design, style, redesign, or polish a webpage, UI component, HTML/CSS/design system, or any frontend visual work — even if they don't explicitly ask for "design rules" or mention this skill by name. Also use when reviewing existing frontend code/screenshots for design quality, or when the output risks looking like generic "AI slop" (cream/sand backgrounds, gradient text, hero-metric templates, uppercase eyebrows, side-stripe borders, over-rounded cards, etc.).
+---
+
 # Impeccable Design Rules
 
-A set of rules agents should follow when creating web pages. Extracted from the `impeccable` frontend design skill (v3.9.1). Self-contained — no external references.
+A set of rules to follow when creating or reviewing web pages and frontend UI. Self-contained — no external references needed.
 
 **Goal:** Design and iterate production-grade frontend interfaces — real working code, committed design choices, exceptional craft. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states.
 
