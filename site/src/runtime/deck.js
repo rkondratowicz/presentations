@@ -22,9 +22,9 @@ function initDeck() {
     if (location.hash !== hash) history.replaceState(null, '', hash);
   }
 
-  function goto(index, smooth = true) {
+  function goto(index) {
     current = clamp(index);
-    slides[current].scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
+    slides[current].scrollIntoView({ behavior: 'auto' });
     render();
   }
 
@@ -86,7 +86,7 @@ function initDeck() {
 
   // Deep link: open on #N.
   const start = parseInt(location.hash.slice(1), 10);
-  if (Number.isFinite(start) && start >= 1) goto(start - 1, false);
+  if (Number.isFinite(start) && start >= 1) goto(start - 1);
   else render();
 }
 
