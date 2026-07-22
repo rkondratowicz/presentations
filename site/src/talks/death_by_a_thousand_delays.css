@@ -20,13 +20,13 @@
   --surface: #dde2e6;
   --surface-2: #d2d9de;
 
-  --ink: #14171c;
-  --ink-muted: #454c54; /* body / subhead copy */
+  --ink: #0f1720;
+  --ink-muted: #33404d; /* body / subhead copy */
 
   /* Kicker + byline muted tone, reusing the existing --accent hook so the
      <Title> kicker (which reads var(--accent)) picks it up for free. */
-  --accent: #566270;
-  --brand: #566270; /* progress bar; kept quiet, not a bright brand color */
+  --accent: #4c5866;
+  --brand: #4c5866; /* progress bar; kept quiet, not a bright brand color */
 
   --border: #c3cbd1;
 

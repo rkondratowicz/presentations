@@ -80,10 +80,17 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: var(--step-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* font-size lives on body only — html keeps the UA default (16px) root so
+   every `rem` in the fluid scale below resolves against a stable base
+   instead of compounding off body's own clamp() (which would blow past
+   the documented ceilings, e.g. h1 rendering ~110px instead of <=96px). */
+body {
+  font-size: var(--step-body);
 }
 
 h1,

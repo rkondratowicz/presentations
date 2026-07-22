@@ -78,12 +78,6 @@ function initDeck() {
     }
   });
 
-  // Click / tap the slide (but not a link/button) advances.
-  deck.addEventListener('click', (e) => {
-    if (e.target.closest('a, button')) return;
-    next();
-  });
-
   // Deep link: open on #N.
   const start = parseInt(location.hash.slice(1), 10);
   if (Number.isFinite(start) && start >= 1) goto(start - 1);
