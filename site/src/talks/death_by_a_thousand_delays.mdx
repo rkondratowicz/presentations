@@ -8,16 +8,17 @@ draft: false
 
 import './death_by_a_thousand_delays.css';
 
-<Title kicker="Node.js tooling in the AI era" subtitle="Rethinking the Node.js toolchain now that AI has made writing code the fastest part of the job.">
+<Title kicker="Node.js tooling in the AI era" subtitle="">
   Death by a *Thousand* Delays
 </Title>
+
+<Image src="/talks/death_by_a_thousand_delays/compiling.png" alt="xkcd comic 'Compiling': a person walks away from their desk saying their code is compiling, while a tooltip reveals they're actually goofing off — a coworker looks on, unimpressed." title="xkcd: Compiling" />
 
 <Slide>
   ## The bottleneck *moved*
 
-  - AI writes the code in seconds.
-  - Now you wait on the *lint*, the *format*, the *test run*, the *install*.
-  - The slow parts of your stack finally show up.
+  - AI writes the code in minutes..
+  - Now you wait on the *lint*, the *format*, the *test*, the *install*.
 </Slide>
 
 <Slide>
@@ -83,12 +84,12 @@ Memory usage:          ~50% lower`} />
 
 <TwoColumn title="Old way vs new way">
   <Fragment slot="left">
-    ### TypeScript 6 ("Strada")
+    ### TypeScript 6
     - JS-based compiler
-    - Great DX, hits a ceiling at scale
+    - Hits a ceiling at scale
   </Fragment>
   <Fragment slot="right">
-    ### TypeScript 7 ("Corsa")
+    ### TypeScript 7
     - Native Go port
     - Same language, radically faster
   </Fragment>
@@ -119,8 +120,8 @@ enableGlobalVirtualStore: true`} />
   </Fragment>
 </TwoColumn>
 
-<Quote cite="Every developer, every AI-assisted PR">
-  The code was never the bottleneck. Everything around it was.
+<Quote cite="Every developer">
+  The code was never the bottleneck.
 </Quote>
 
 <Slide>

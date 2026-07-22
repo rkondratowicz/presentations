@@ -33,6 +33,15 @@
   /* The one accent color, reserved for a single emphasized word per headline. */
   --cobalt: #2b3fa0;
 
+  /* Wider type scale for this talk: push display/h2 headlines bigger and
+     pull body/h3 copy a bit smaller, so the size contrast between a slide's
+     headline and its supporting text reads more dramatically from the back
+     of the room. */
+  --step-body: clamp(1.05rem, 0.85rem + 1vw, 1.5rem);
+  --step-h3: clamp(1.4rem, 1.05rem + 1.4vw, 2rem);
+  --step-h2: clamp(2.6rem, 1.7rem + 3.2vw, 4.2rem);
+  --step-display: clamp(3.2rem, 1.8rem + 5.6vw, 6.5rem);
+
   color-scheme: light;
 }
 
@@ -80,7 +89,7 @@ h3 em {
   text-transform: uppercase !important;
   font-weight: 700 !important;
   letter-spacing: 0.14em !important;
-  font-size: 0.8rem !important;
+  font-size: 0.7rem !important;
 }
 
 /* Footer numbering, styled like a running issue/page number. */
