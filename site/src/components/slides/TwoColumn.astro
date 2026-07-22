@@ -10,7 +10,7 @@ const { title } = Astro.props;
 
 <section class="slide">
   <div>
-    {title && <h3>{title}</h3>}
+    {title && <h1>{title}</h1>}
     <div class="cols">
       <div class="col"><slot name="left" /></div>
       <div class="col"><slot name="right" /></div>

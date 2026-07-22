@@ -9,11 +9,15 @@
  * single-word emphasis) that the base components don't already expose.
  */
 
-/* Body font for this talk only — Space Grotesk. */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+/* Body font for this talk only — Albert Sans at weight 300 (kept light to
+   match the thin headline treatment); 700 stays loaded for the bold kicker.
+   Headline font — Alumni Sans at its thinnest weight (100), replacing the
+   shared Iowan Old Style serif. */
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;700&family=Alumni+Sans:wght@100&display=swap');
 
 :root {
-  --font-body: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Albert Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Alumni Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
   /* Pale blue-gray paper, near-black ink — the print-page palette. */
   --bg: #e8ecef;
@@ -34,13 +38,15 @@
   --cobalt: #2b3fa0;
 
   /* Wider type scale for this talk: push display/h2 headlines bigger and
-     pull body/h3 copy a bit smaller, so the size contrast between a slide's
-     headline and its supporting text reads more dramatically from the back
-     of the room. */
-  --step-body: clamp(1.05rem, 0.85rem + 1vw, 1.5rem);
-  --step-h3: clamp(1.4rem, 1.05rem + 1.4vw, 2rem);
-  --step-h2: clamp(2.6rem, 1.7rem + 3.2vw, 4.2rem);
-  --step-display: clamp(3.2rem, 1.8rem + 5.6vw, 6.5rem);
+     give body/h3 copy more headroom, so the size contrast between a slide's
+     headline and its supporting text reads dramatically from the back of
+     the room, while everything stays legible up close. --step-display is
+     capped at 6rem (the documented display ceiling) — it was 6.5rem before,
+     which overshot it. */
+  --step-body: clamp(1.15rem, 0.9rem + 1.1vw, 1.65rem);
+  --step-h3: clamp(1.5rem, 1.05rem + 1.7vw, 2.3rem);
+  --step-h2: clamp(2.9rem, 1.9rem + 3.6vw, 4.75rem);
+  --step-display: clamp(3.5rem, 2.1rem + 4.8vw, 6rem);
 
   color-scheme: light;
 }
@@ -48,13 +54,16 @@
 body {
   background: var(--bg);
   color: var(--ink);
+  font-weight: 300; /* only 300/700 of Albert Sans are loaded */
 }
 
-/* Regular-weight serif headlines — bolding pushes this back toward "pitch deck". */
+/* Thin-weight sans headlines — only weight 100 of Alumni Sans is loaded,
+   so font-weight must match exactly or the browser will synthesize a
+   heavier fake weight on top of the thin glyphs. */
 h1,
 h2,
 h3 {
-  font-weight: 400;
+  font-weight: 100;
 }
 
 h1 {
@@ -89,7 +98,37 @@ h3 em {
   text-transform: uppercase !important;
   font-weight: 700 !important;
   letter-spacing: 0.14em !important;
-  font-size: 0.7rem !important;
+  font-size: 0.85rem !important;
+}
+
+/* Image/Code/TwoColumn all render an optional title as a plain <h3> that's
+   a direct first child of the slide's wrapper div — semantically a small
+   caption introducing the slide's content (an image credit, a snippet
+   name, a comparison's framing), not a competing headline. Sizing it down
+   keeps it from reading as a third stacked heading next to the real
+   headline (h2) and the comparison's own sub-headers (.col h3 below). */
+.slide > div > h3:first-child {
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.4rem);
+}
+
+/* The comparison sub-headers inside <TwoColumn> (e.g. "ESLint + Prettier" /
+   "oxlint + oxfmt") are the real headline of that slide's right/left split —
+   restore full h3 size so they don't inherit the caption treatment above. */
+.cols h3 {
+  font-size: var(--step-h3);
+}
+
+/* The closing quote is the deck's one full-bleed "big statement" moment —
+   give it the same weight as a display headline instead of the smaller
+   h2 size Quote.astro uses by default. */
+.slide--quote blockquote {
+  font-size: var(--step-display) !important;
+}
+
+/* Code blocks inherit Code.astro's own font-size clamp; bump it slightly so
+   snippets stay legible now that body copy elsewhere in this talk is larger. */
+.code-frame pre {
+  font-size: clamp(1.05rem, 0.85rem + 0.9vw, 1.4rem) !important;
 }
 
 /* Footer numbering, styled like a running issue/page number. */

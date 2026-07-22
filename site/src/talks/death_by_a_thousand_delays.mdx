@@ -8,21 +8,21 @@ draft: false
 
 import './death_by_a_thousand_delays.css';
 
-<Title kicker="Node.js tooling in the AI era" subtitle="">
+<Title kicker="" subtitle="Node.js tooling in the AI era">
   Death by a *Thousand* Delays
 </Title>
 
 <Image src="/talks/death_by_a_thousand_delays/compiling.png" alt="xkcd comic 'Compiling': a person walks away from their desk saying their code is compiling, while a tooltip reveals they're actually goofing off — a coworker looks on, unimpressed." title="xkcd: Compiling" />
 
 <Slide>
-  ## The bottleneck *moved*
+  # The bottleneck *moved*
 
   - AI writes the code in minutes..
   - Now you wait on the *lint*, the *format*, the *test*, the *install*.
 </Slide>
 
 <Slide>
-  ## ESLint & Prettier: the *tax* on every save
+  # ESLint & Prettier: the *tax* on every save
 
   Industry standard. Also just... slow.
 </Slide>
@@ -30,15 +30,15 @@ import './death_by_a_thousand_delays.css';
 <Code title="Same rules, different engine" lang="bash" code={`npx oxlint@latest      # 50-100x faster than ESLint
 npx oxfmt@latest       # 30x faster than Prettier`} />
 
-<TwoColumn title="Old way vs new way">
+<TwoColumn title="">
   <Fragment slot="left">
-    ### ESLint + Prettier
+    ## ESLint + Prettier
     - Two tools, two configs
     - JS-based, single-threaded
     - Minutes on large monorepos
   </Fragment>
   <Fragment slot="right">
-    ### oxlint + oxfmt
+    ## oxlint + oxfmt
     - Rust, parallel by default
     - 800+ rules, ESLint-compatible
     - Type-aware linting via `tsgo`
@@ -46,26 +46,20 @@ npx oxfmt@latest       # 30x faster than Prettier`} />
 </TwoColumn>
 
 <Slide>
-  ## Jest was *never* built for this
+  # Jest was *never* built for this
 
   A second build pipeline, just for tests.
 </Slide>
 
-<Code title="One pipeline, not two" lang="ts" code={`// vite.config.ts
-export default defineConfig({
-  plugins: [react()],
-  test: { environment: 'jsdom' }, // Vitest reuses this
-});`} />
-
-<TwoColumn title="Old way vs new way">
+<TwoColumn title="">
   <Fragment slot="left">
-    ### Jest
+    ## Jest
     - Separate transform pipeline
     - Own config, own mocks
     - Cold starts add up
   </Fragment>
   <Fragment slot="right">
-    ### Vitest
+    ## Vitest
     - Shares your Vite config
     - Instant HMR watch mode
     - Jest-compatible API
@@ -73,7 +67,7 @@ export default defineConfig({
 </TwoColumn>
 
 <Slide>
-  ## `tsc` is the *longest* coffee break
+  # `tsc` is the *longest* coffee break
 
   Editors stall. CI waits. You wait.
 </Slide>
@@ -82,21 +76,21 @@ export default defineConfig({
 VS Code project load:  9.6s -> 1.2s
 Memory usage:          ~50% lower`} />
 
-<TwoColumn title="Old way vs new way">
+<TwoColumn title="">
   <Fragment slot="left">
-    ### TypeScript 6
+    ## TypeScript 6
     - JS-based compiler
     - Hits a ceiling at scale
   </Fragment>
   <Fragment slot="right">
-    ### TypeScript 7
+    ## TypeScript 7
     - Native Go port
     - Same language, radically faster
   </Fragment>
 </TwoColumn>
 
 <Slide>
-  ## `npm install`, *again*
+  # `npm install`, *again*
 
   Every worktree. Every agent. Every time.
 </Slide>
@@ -105,15 +99,15 @@ Memory usage:          ~50% lower`} />
   - 'packages/*'
 enableGlobalVirtualStore: true`} />
 
-<TwoColumn title="Old way vs new way">
+<TwoColumn title="">
   <Fragment slot="left">
-    ### npm
+    ## npm
     - One `node_modules` copy per project
     - New worktree = full reinstall
     - Fine for 1 agent, painful for 5
   </Fragment>
   <Fragment slot="right">
-    ### pnpm
+    ## pnpm
     - Content-addressable global store
     - New worktree = symlinks, nearly instant
     - Built for parallel AI agents
@@ -121,11 +115,11 @@ enableGlobalVirtualStore: true`} />
 </TwoColumn>
 
 <Quote cite="Every developer">
-  The code was never the bottleneck.
+  "The code was never the bottleneck."
 </Quote>
 
 <Slide>
-  ## Thanks
+  # Thanks
 
   Questions?
 </Slide>
